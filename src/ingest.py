@@ -4,7 +4,6 @@ import os
 
 def load_and_split_pdfs(pdf_folder):
     docs = []
-    # Verify the folder exists before trying to read it
     if not os.path.exists(pdf_folder):
         print(f"Error: The folder '{pdf_folder}' was not found.")
         return []
@@ -12,7 +11,7 @@ def load_and_split_pdfs(pdf_folder):
     for filename in os.listdir(pdf_folder):
         if filename.lower().endswith(".pdf"):
             file_path = os.path.join(pdf_folder, filename)
-            print(f"Loading: {filename}...") # helpful print to see progress
+            print(f"Loading: {filename}...")
             try:
                 loader = UnstructuredPDFLoader(file_path)
                 pages = loader.load()
@@ -20,7 +19,6 @@ def load_and_split_pdfs(pdf_folder):
             except Exception as e:
                 print(f"Failed to load {filename}: {e}")
 
-    # Split into chunks
     if not docs:
         print("No documents were loaded.")
         return []
